@@ -5,6 +5,7 @@ import codecs
 
 inplay = set([])
 called = []
+conly = False
 
 place = {"bilabial":set(["b", "p", "m", u"w\u0325", "w"]), "labiodental":set(["f", "v"]), "interdental":set([u"\u03B8", u"\u00F0"]),"alveolar":set(["t", "d", "s", "z", "l", u"\u0279", "n"]), "postalveolar":set([u"\u0283", u"\u0292",u"t\u0283", u"d\u0292"]), "palatal":set(["j"]),"velar":set(["k", "g",u"\u014B"]), "glottal":set([u"\u0294", "h"])}
 manner = {"stop":set(["b","p","t","d","k","g",u"\u0294"]),"fricative":set(["f","v",u"\u03B8",u"\u00F0","s","z",u"\u0283",u"\u0292","h"]),"affricate":set([u"t\u0283",u"d\u0292"]),"glide":set(["w","j",u"w\u0325"]), "nasal":set(["m","n",u"\u014B"]) ,"lateral liquid":set(["l"]), "retroflex liquid":set([u"\u0279"])}
@@ -85,7 +86,8 @@ def vowl(n=3):
 
 def call():
     """makes a call to either the consnant or vowel call functions, and if the result hasn't been made yet, formats it for output"""
-    choice=random.choice([vowl(), cons(), cons()])
+    if conly: choice = cons()
+    else: choice=random.choice([vowl(), cons(), cons()])
     choice[0].sort(key = lambda x: ordering[x])
     global called, inplay
     if choice[0] not in called:
@@ -120,12 +122,23 @@ def ng():
     global called, inplay
     called = []
     inplay = set([])
-    return "Ready for new game!"
+    print("Ready for new game!")
+    return
 
-    
+def conl(boo):
+    """toggle consonants only"""
+    global conly
+    conly = boo
+    if conly == True:
+        print("calling consonants only")
+        return
+    else: print("calling all sounds")
+    creturn
+
+
 
 print("[l"+u"\u026A"+u"\u014B"+"go"+u"\u028A"+"]!")
-print("COMMANDS:\n c = call\n h = game history\n i = sounds in play\n new = reset for a new game\n quit = quit")
+print("COMMANDS:\n c = call\n h = game history\n i = sounds in play\n new = reset for a new game\n conly = call only consonants\n allsounds = call consonants and vowels\n quit= quit")
 comm = ""
 while comm != "quit":
     comm = input()
@@ -134,6 +147,8 @@ while comm != "quit":
     if comm == "i": inp()
     if comm == "new":ng()
     if comm == "t": test()
+    if comm == "conly": conl(True)
+    if comm == "allsounds": conl(False)
      
 
 
