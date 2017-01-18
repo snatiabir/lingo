@@ -133,12 +133,20 @@ def conl(boo):
         print("calling consonants only")
         return
     else: print("calling all sounds")
-    creturn
+    return
+
+commands = "CALL COMMANDS:\n c = call\n h = game history\n i = sounds in play\n new = resent history for new game\n q= quit"
+settings = "GAME SETTINGS:\n conly = call consonants only\n allsounds = call consonants and vowels \n mode = check which call mode you are in"
 
 
 
-print("[l"+u"\u026A"+u"\u014B"+"go"+u"\u028A"+"]!")
-print("COMMANDS:\n c = call\n h = game history\n i = sounds in play\n new = reset for a new game\n conly = call only consonants\n allsounds = call consonants and vowels\n quit= quit")
+
+
+gametitle="[l"+u"\u026A"+u"\u014B"+"go"+u"\u028A"+"]!"
+
+print(gametitle)
+print(commands)
+print(settings)
 comm = ""
 while comm != "quit":
     comm = input()
@@ -149,6 +157,8 @@ while comm != "quit":
     if comm == "t": test()
     if comm == "conly": conl(True)
     if comm == "allsounds": conl(False)
+    if comm == "mode": print("consonants only: "+str(conly))
+    if comm == "help": print(commands)
      
 
 
